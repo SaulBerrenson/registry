@@ -1,0 +1,2 @@
+# registry
+custom vcpkg-registry
