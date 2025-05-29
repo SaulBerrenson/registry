@@ -1,0 +1,12 @@
+{
+  "default": {
+    "boost": {
+      "baseline": "1.87.0",
+      "port-version": 2
+    },
+    "qt5-base": {
+      "baseline": "5.15.16",
+      "port-version": 4
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "boost",
+  "version": "1.87.0",
+  "port-version": 2,
+  "description": "Fork port for build custom boost build",
+  "homepage": "https://github.com/boostorg/boost",
+  "license": "BSD-3-Clause",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ],
+  "features": {
+    "force-shared": {
+      "description": "Build shared libs (ignore tripplet)"
+    },
+    "force-static": {
+      "description": "Build static libs (ignore tripplet)"
+    }
+  }
+}

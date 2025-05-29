@@ -26,6 +26,16 @@ def get_version_port_version(version):
         return version['port-version']
     return 0
 
+def get_current_branch():
+    """Get the current git branch name"""
+    result = subprocess.run('git branch --show-current', 
+                          shell=True, 
+                          capture_output=True, 
+                          text=True)
+    if result.returncode == 0:
+        return result.stdout.strip()  # Use .strip() to remove newline
+    else:
+        return "HEAD"
 
 def get_port_names():
     # Assume each directory in ${VCPKG_ROOT}/ports is a different port
@@ -78,7 +88,6 @@ def make_vcpkg_configuration():
     port_names = get_port_names()
 
     git_ret = subprocess.run("git remote get-url origin --push", shell=True, capture_output=True, text=True)
-    git_branch_ret = subprocess.run("git branch --show-current", shell=True, capture_output=True, text=True)
     baseline_ret = subprocess.run('git rev-parse HEAD', shell=True, capture_output=True, text=True)
 
     if git_ret.returncode == 0:
@@ -101,7 +110,7 @@ def make_vcpkg_configuration():
             {
                 "kind": "git",
                 "repository": origin_url,
-                "reference": git_branch_ret,
+                "reference": get_current_branch(),
                 "packages": port_names,
                 "baseline": baseline_hash
             }
